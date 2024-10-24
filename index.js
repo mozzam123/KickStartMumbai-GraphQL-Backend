@@ -1,22 +1,15 @@
 const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
 const { typeDefs } = require("./schema/userSchema");
-const { resolvers } = require("./resolvers/userResolver");
-const mongoose = require("mongoose");
+const { UserResolvers } = require("./resolvers/userResolver");
+const { connectToDatabase } = require("./config/db");
 
-mongoose
-  .connect("mongodb://localhost:27017/KickStartMumbai")
-  .then(() => {
-    console.log("Mongo connected for KickstartMumbai ");
-  })
-  .catch((error) => {
-    console.log("Unexpected error in DB: ", error);
-  });
-
+// function to connect to mongoDB database
+connectToDatabase();
 
 const server = new ApolloServer({
   typeDefs,
-  resolvers,
+  resolvers: UserResolvers,
 });
 
 startStandaloneServer(server, {

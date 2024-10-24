@@ -1,14 +1,12 @@
 const UserModel  = require("./../models/userModel");
 
-const resolvers = {
+const UserResolvers = {
   Query: {
     async users() {
       const users = await UserModel.find();
-      console.log("*****");
-      console.log(users);
       return users;
     },
   },
 };
 
-module.exports = { resolvers };
+module.exports = { UserResolvers };
