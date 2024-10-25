@@ -37,6 +37,26 @@ const UserResolvers = {
         throw new Error(`Error in addUser: ${error.message}`);
       }
     },
+    deleteUser: async (_, args) => {
+      try {
+        // Find the user by ID
+        const userToDelete = await UserModel.findById(args.id);
+
+        // Check if the user exists
+        if (!userToDelete) {
+          return Error("User not found");
+        }
+
+        // Delete the user
+        const deletedUser = await UserModel.findByIdAndDelete(args.id);
+
+        // Return a success message or the deleted user
+        return deletedUser;
+      } catch (error) {
+        console.error("Error in deleteUser:", error.message);
+        throw new Error(`Error in deleteUser: ${error.message}`);
+      }
+    },
   },
 };
 
