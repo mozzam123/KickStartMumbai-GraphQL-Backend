@@ -9,9 +9,7 @@ const UserResolvers = {
     async user(_, args) {
       // Use findById to get a single user
       const user = await UserModel.findById(args.id);
-      console.log("id: ", args.id);
-      console.log(user);
-      return user; // Return the user directly (not as an array)
+      return user; 
     },
   },
 };
