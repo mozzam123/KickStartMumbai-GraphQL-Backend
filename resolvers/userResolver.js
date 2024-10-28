@@ -3,13 +3,23 @@ const UserModel = require("./../models/userModel");
 const UserResolvers = {
   Query: {
     async users() {
-      const users = await UserModel.find();
-      return users;
+      try {
+        const users = await UserModel.find();
+        return users;
+      } catch (error) {
+        throw new Error(`Failed to fetch users: ${error.message}`);
+      }
     },
     async user(_, args) {
-      // Use findById to get a single user
-      const user = await UserModel.findById(args.id);
-      return user;
+      try {
+        const user = await UserModel.findById(args.id);
+        if (!user) {
+          throw new Error(`User with ID ${args.id} not found`);
+        }
+        return user;
+      } catch (error) {
+        throw new Error(`Failed to fetch user: ${error.message}`);
+      }
     },
   },
   Mutation: {

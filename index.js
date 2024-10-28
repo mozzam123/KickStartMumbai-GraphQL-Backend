@@ -1,15 +1,22 @@
 const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
-const { typeDefs } = require("./schema/userSchema");
+const { userDef } = require("./schema/userSchema");
+const { teamDefs } = require("./schema/teamSchema");
 const { UserResolvers } = require("./resolvers/userResolver");
 const { connectToDatabase } = require("./config/db");
 
 // function to connect to mongoDB database
 connectToDatabase();
 
+// merge all typeDefs
+const typeDefs = [userDef, teamDefs];
+
+// merge all resolvers
+const resolvers = [UserResolvers];
+
 const server = new ApolloServer({
   typeDefs,
-  resolvers: UserResolvers,
+  resolvers
 });
 
 startStandaloneServer(server, {

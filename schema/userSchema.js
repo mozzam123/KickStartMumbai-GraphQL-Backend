@@ -1,4 +1,4 @@
-const typeDefs = `#graphql
+const userDef = `#graphql
 type User{
   _id: ID!,
   name: String!,
@@ -20,4 +20,4 @@ input addUserInput{
 }
 `;
 
-module.exports = { typeDefs };
+module.exports = { userDef };
