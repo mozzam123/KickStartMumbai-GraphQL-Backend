@@ -12,6 +12,10 @@ type Team{
     players: [Player!]
 
 }
+
+type Query{
+    teams: [Team]
+}
 `;
 
 module.exports = { teamDefs };

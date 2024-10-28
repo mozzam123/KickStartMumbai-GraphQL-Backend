@@ -26,11 +26,11 @@ const UserResolvers = {
     addUser: async (_, args) => {
       try {
         if (!args.user.name || !args.user.password) {
-          return Error("Please provide name and password fields");
+          throw new Error("Please provide name and password fields");
         }
         const existingUser = await UserModel.findOne({ name: args.user.name });
         if (existingUser) {
-          return Error("User already exists with this name");
+          throw new Error("User already exists with this name");
         }
 
         // Create new user
@@ -54,7 +54,7 @@ const UserResolvers = {
 
         // Check if the user exists
         if (!userToDelete) {
-          return Error("User not found");
+          throw new Error("User not found");
         }
 
         // Delete the user
