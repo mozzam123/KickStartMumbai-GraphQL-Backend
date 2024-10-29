@@ -14,7 +14,8 @@ type Team{
 }
 
 type Query{
-    teams: [Team]
+    teams: [Team!]
+    team(id:ID!): Team
 }
 `;
 
