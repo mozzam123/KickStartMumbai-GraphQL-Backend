@@ -18,6 +18,26 @@ const teamResolvers = {
       }
     },
   },
+  Mutation: {
+    addTeam: async (_, args) => {
+      console.log(args.team.manager);
+      if (!args.team.manager) {
+        throw new Error("manager key is required");
+      }
+
+      if (!args.team.name) {
+        throw new Error("name key is required");
+      }
+      // Create new team
+      const newTeam = await teamModel.create({
+        name: args.team.name,
+        manager: args.team.manager,
+        players: args.team.players,
+      });
+
+      return newTeam;
+    },
+  },
 };
 
 module.exports = { teamResolvers };

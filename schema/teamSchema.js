@@ -17,6 +17,22 @@ type Query{
     teams: [Team!]
     team(id:ID!): Team
 }
+
+type Mutation{
+    addTeam(team: addTeamInput!): Team
+}
+
+input addPlayerInput{
+    name: String!,
+    age: String!
+}
+
+
+input addTeamInput{
+    name: String!,
+    manager: String!
+    players: [addPlayerInput!] # Using AddPlayerInput here instead of Player
+}
 `;
 
 module.exports = { teamDefs };
