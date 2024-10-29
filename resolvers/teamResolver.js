@@ -40,6 +40,20 @@ const teamResolvers = {
         team: newTeam,
       };
     },
+    deleteTeam: async (_, args) => {
+      if (!args.id) {
+        throw new Error("cannot leave id blank");
+      }
+      const existingTeam = await teamModel.findById(args.id);
+      if (!existingTeam) {
+        throw new Error("Team does not exist");
+      }
+      const deletedTeam = await teamModel.findByIdAndDelete(args.id);
+      return {
+        message: "Team Deleted successfully",
+        team: deletedTeam,
+      };
+    },
   },
 };
 

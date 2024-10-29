@@ -20,6 +20,7 @@ type Query{
 
 type Mutation{
     addTeam(team: addTeamInput!): AddTeamResponse
+    deleteTeam(id:ID!): AddTeamResponse
 }
 
 input addPlayerInput{
