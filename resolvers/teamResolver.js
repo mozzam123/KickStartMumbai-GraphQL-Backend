@@ -35,7 +35,10 @@ const teamResolvers = {
         players: args.team.players,
       });
 
-      return newTeam;
+      return {
+        message: "Team saved successfully",
+        team: newTeam,
+      };
     },
   },
 };

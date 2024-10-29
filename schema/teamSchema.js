@@ -19,7 +19,7 @@ type Query{
 }
 
 type Mutation{
-    addTeam(team: addTeamInput!): Team
+    addTeam(team: addTeamInput!): AddTeamResponse
 }
 
 input addPlayerInput{
@@ -32,6 +32,11 @@ input addTeamInput{
     name: String!,
     manager: String!
     players: [addPlayerInput!] # Using AddPlayerInput here instead of Player
+}
+
+type AddTeamResponse {
+    message: String!
+    team: Team
 }
 `;
 
