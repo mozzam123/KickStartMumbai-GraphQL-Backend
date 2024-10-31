@@ -39,7 +39,6 @@ const UserResolvers = {
           password: args.user.password,
           email: args.user.email,
         });
-        console.log(newUser);
 
         return newUser;
       } catch (error) {

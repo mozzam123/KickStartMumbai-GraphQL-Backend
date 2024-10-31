@@ -20,7 +20,6 @@ const teamResolvers = {
   },
   Mutation: {
     addTeam: async (_, args) => {
-      console.log(args.team.manager);
       if (!args.team.manager) {
         throw new Error("manager key is required");
       }
@@ -52,6 +51,28 @@ const teamResolvers = {
       return {
         message: "Team Deleted successfully",
         team: deletedTeam,
+      };
+    },
+    updateTeam: async (_, args) => {
+      if (!args.id) {
+        throw new Error("cannot leave id blank");
+      }
+      const existingTeam = await teamModel.findById(args.id);
+      if (!existingTeam) {
+        throw new Error("Team not found!!");
+      }
+
+      const updateExistingTeam = await teamModel.findByIdAndUpdate(
+        args.id,
+        args.team,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+      return {
+        message: "Team Updated successfully",
+        team: updateExistingTeam,
       };
     },
   },
