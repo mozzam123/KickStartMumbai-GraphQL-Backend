@@ -6,8 +6,18 @@ const tournamentResolver = {
       const allTournaments = await tournamentModel.find();
       return allTournaments;
     },
+    async tournament(_, args) {
+      if (!args.id) {
+        throw new Error("Id is required");
+      }
+      const existingTournament = await tournamentModel.findById(args.id);
+      if (!existingTournament) {
+        throw new Error("Tournament does not exist");
+      }
+
+      return existingTournament;
+    },
   },
 };
-
 
 module.exports = { tournamentResolver };

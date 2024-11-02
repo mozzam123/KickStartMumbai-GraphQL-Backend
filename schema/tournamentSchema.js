@@ -11,6 +11,7 @@ type Tournament{
 
 type Query{
     tournaments: [Tournament!]
+    tournament(id:ID!): Tournament
 }
 `;
 
