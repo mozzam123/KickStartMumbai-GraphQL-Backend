@@ -12,6 +12,12 @@ type Tournament{
 type Query{
     tournaments: [Tournament!]
     tournament(id:ID!): Tournament
+    deleteTournament(id:ID!): AddResponse
+}
+
+type AddResponse {
+    message: String!
+    tournament: Tournament
 }
 `;
 
