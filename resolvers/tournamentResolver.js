@@ -31,6 +31,9 @@ const tournamentResolver = {
         tournament: deletedTournament,
       };
     },
+    async updateTournament(_, args){
+      console.log(args);
+    }
   },
 };
 

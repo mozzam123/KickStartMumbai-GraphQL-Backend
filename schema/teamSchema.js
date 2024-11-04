@@ -40,6 +40,8 @@ type AddTeamResponse {
     message: String!
     team: Team
 }
+
+
 `;
 
 module.exports = { teamDefs };
