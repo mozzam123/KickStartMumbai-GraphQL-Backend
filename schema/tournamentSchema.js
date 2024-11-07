@@ -12,9 +12,13 @@ type Tournament{
 type Query{
     tournaments: [Tournament!]
     tournament(id:ID!): Tournament
+}
+
+type Mutation{
     deleteTournament(id:ID!): AddResponse
     updateTournament(id: ID!, tournament: addTournamentInput!): AddResponse
 }
+
 
 type AddResponse {
     message: String!
@@ -22,12 +26,12 @@ type AddResponse {
 }
 
 input addTournamentInput{
-    name: String!,
-    date: String!,
-    match_type: String!,
-    location: String!,
-    teams: [String]
-    organizer: String!
+    name: String,
+    location: String,
+    date: String,
+    teams: [String],
+    organizer: String
+
 }
 `;
 
