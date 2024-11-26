@@ -17,6 +17,7 @@ type Query{
 type Mutation{
     deleteTournament(id:ID!): AddResponse
     updateTournament(id: ID!, tournament: addTournamentInput!): AddResponse
+    addTeamInTournament(teamID: ID!, tournamentID: ID!): AddResponse
 }
 
 
@@ -33,6 +34,7 @@ input addTournamentInput{
     organizer: String
 
 }
+
 `;
 
 module.exports = { tournamentDefs };

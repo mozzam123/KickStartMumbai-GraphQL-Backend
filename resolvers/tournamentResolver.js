@@ -1,5 +1,6 @@
 const tournamentModel = require("./../models/tournamentModel");
-const userModel = require("./../models/userModel")
+const userModel = require("./../models/userModel");
+const teamModel = require("./../models/teamModel");
 
 const tournamentResolver = {
   Query: {
@@ -72,6 +73,40 @@ const tournamentResolver = {
       return {
         message: "Tournament updated successfully",
         tournament: updatedTournament,
+      };
+    },
+    async addTeamInTournament(_, args) {
+      if (!args.teamID || !args.tournamentID) {
+        throw new Error("Team ID or Tournament ID is not present");
+      }
+      const existingTeam = await teamModel.findById(args.teamID);
+
+      if (!existingTeam) {
+        throw new Error("Team does not exist");
+      }
+
+      const existingTournament = await tournamentModel.findById(
+        args.tournamentID
+      );
+
+      if (!existingTournament) {
+        throw new Error("Tournament does not exist!");
+      }
+
+      // Check if the team is already in the tournament
+      if (
+        existingTournament.teams &&
+        existingTournament.teams.includes(args.teamID)
+      ) {
+        throw new Error("Team is already in the tournament!");
+      }
+      // Add the team to the tournament
+      existingTournament.teams.push(args.teamID);
+      await existingTournament.save();
+
+      return {
+        message: "Team successfully added to the tournament!",
+        tournament: existingTournament,
       };
     },
   },
