@@ -4,6 +4,7 @@ type User{
   name: String!,
   email: String,
   password: String!
+  address: String
 }
 type Query {
     users: [User]
@@ -17,6 +18,7 @@ input addUserInput{
   name: String!,
   email: String,
   password: String!
+  address: String
 }
 `;
 

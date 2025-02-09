@@ -60,13 +60,13 @@ const tournamentResolver = {
       if (!existingTournament) {
         throw new Error("Tournament does not exist");
       }
-
+      // Mutation to add team in a tournament.
       const updatedTournament = await tournamentModel.findByIdAndUpdate(
         args.id,
         args.tournament,
         {
-          new: true, // return the updated document
-          runValidators: true, // validate fields before updating
+          new: true,
+          runValidators: true,
         }
       );
 

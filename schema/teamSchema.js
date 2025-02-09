@@ -2,7 +2,7 @@ const teamDefs = `#graphql
 type Player{
     _id: ID!,
     name: String!,
-    age: String!
+    age: String! @deprecated(reason: "open rink is going to be mandatory")
 }
 
 type Team{
